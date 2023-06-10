@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+class EventScheduleModel {
+  final int id;
+  final String event_id;
+  final String eventName;
+  final String eventTime;
+  final String eventDate;
+  final String eventPlace;
+  final String eventPicture;
+  final String eventDesc;
+  final DateTime created_at;
+  final DateTime updated_at;
+
+  EventScheduleModel({
+    required this.id,
+    required this.event_id,
+    required this.eventName,
+    required this.eventTime,
+    required this.eventDate,
+    required this.eventPlace,
+    required this.eventPicture,
+    required this.eventDesc,
+    required this.created_at,
+    required this.updated_at,
+  });
+  
+  factory EventScheduleModel.fromJson(Map<String, dynamic> json) {
+    return EventScheduleModel(
+      id: json['id'],
+      event_id: json['event_id'],
+      eventName: json['eventName'],
+      eventTime: json['eventTime'],
+      eventDate: json['eventDate'],
+      eventPlace: json['eventPlace'],
+      eventPicture: json['eventPicture'],
+      eventDesc: json['eventDesc'],
+      created_at: DateTime.parse(json['created_at']),
+      updated_at: DateTime.parse(json['updated_at']),
+    );
+  }
+}

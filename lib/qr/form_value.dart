@@ -2,14 +2,17 @@ import 'dart:convert';
 
 import 'package:attendance_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 class FormValue extends StatefulWidget {
+final Function screenClose;
 final String studentName;
 final String studentID;
 final String email;
 
 const FormValue({ 
   Key? key,
+  required this.screenClose,
   required this.studentName,
   required this.studentID,
   required this.email 
@@ -20,8 +23,13 @@ const FormValue({
 }
 
 class _FormValueState extends State<FormValue> {
+  Future<String> getEventId() async{
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  return pref.getString('event_id') ?? '';
+  }
 
   Future<void> stockIn()async{
+    String eventId = await getEventId();
     final studentId = studentIDcontrol.text;
     final name = nameControl.text;
     final email = emailcontrol.text;
@@ -32,7 +40,7 @@ class _FormValueState extends State<FormValue> {
       'studentId' : int.parse(studentId),
     };
     final response = await http.post(
-      Uri.parse(postAttendance),
+      Uri.parse('$postAttendance$eventId'),
       body: jsonEncode(body),
       headers: {
         'Content-type' : 'application/json'
