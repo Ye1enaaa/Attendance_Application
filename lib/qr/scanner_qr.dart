@@ -54,7 +54,7 @@ class _ScannerQrState extends State<ScannerQr> {
         screenClosed();
         return AlertDialog(
           content: Container(
-            height: 500,
+            height: 300,
             child: Column(
               children: [
                 const SizedBox(height: 20),

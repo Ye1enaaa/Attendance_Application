@@ -47,9 +47,18 @@ class _FormValueState extends State<FormValue> {
       }
     );
     //final data = jsonEncode(body);
-    if(response.statusCode == 200){
-      print('Success');
+    for (int i = 0; i < 2; i++) {
+      if (response.statusCode == 200) {
+        print('Success');
+        Navigator.pop(context);
+      }
     }
+    if (response.statusCode == 200) {
+        print('Success');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Log Successfully')),
+        );
+      }
     print(response.body);
   }
   var formKey = GlobalKey<FormState>();
